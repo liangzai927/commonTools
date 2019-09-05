@@ -65,3 +65,30 @@ function onlyOne6(arr){
 
     return url
  }
+
+
+ /**
+* 数组去重（对象或者普通数字字符串都可以）
+* @param 
+* 	arr  要去重的数组  Array类型
+*   key	 如果是数组中是对象，key为对象的唯一值，根据此唯一值进行去重，String类型，非必填
+* @returns  newArr，去重后的数组，如果没有传递参数则返回空数组
+*/
+function arrayToHeavy(arr, key) {
+	if (!arr) return [];
+	if (Object.prototype.toString.call(arr) !== '[object Array]') return console.warn('给我一个数组');
+	let newArr = [];
+	// 普通的数字字符串去重
+	if (!key) {
+		newArr = Array.from(new Set(arr));
+	} else {	// 数组对象去重
+		const keyArr = [];
+		arr.forEach((ite) => {
+			if (!keyArr.includes(ite[key])) {
+				keyArr.push(ite[key]);
+				newArr.push(ite);
+			}
+		})
+	}
+	return newArr;
+}
